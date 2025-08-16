@@ -27,12 +27,14 @@ def create_mechanics_df(d):
     # Add a column for character names
     df['Name'] = names
     for m in d['mechanics']:
+        print(f"m is {m}")
         for md in m['mechanicsData']:
+            print(f"md is {md}")
             try:
                 account = df.index[df['Name'] == md['actor']].tolist()[0]
             except IndexError:
                 # this is an NPC actor, make a row for them.
-                row = pd.Series(data={m['name']: md['time'],
+                row = pd.Series(data={m['name']: [md['time'],],
                                       'Name': md['actor']})
                 account = md['actor']
                 df.loc[account] = row
@@ -41,11 +43,6 @@ def create_mechanics_df(d):
                 # If the cell is a NaN, overwrite it with a list containing
                 # the time
                 df[m['name']][account] = [md['time'],]
-            elif isinstance(df.at[account, m['name']], int):
-                # If the cell is an int, make a 2-element list by appending
-                # the time
-                df[m['name']][account] = [int(df[m['name']][account]),
-                                          md['time']]
             else:
                 # Append the time
                 df.at[account, m['name']].append(md['time'])
