@@ -27,9 +27,7 @@ def create_mechanics_df(d):
     # Add a column for character names
     df['Name'] = names
     for m in d['mechanics']:
-        print(f"m is {m}")
         for md in m['mechanicsData']:
-            print(f"md is {md}")
             try:
                 account = df.index[df['Name'] == md['actor']].tolist()[0]
             except IndexError:
