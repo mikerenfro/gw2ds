@@ -9,8 +9,13 @@ if __name__ == "__main__":
 
     data = dr.read_json_url(args.url)
     mechanics_df = dr.create_mechanics_df(data)
+    print("Overall dataframe")
     print(mechanics_df)
 
-    print("Who died when?")
+    print("\nWho died when?")
     death_df = mechanics_df.sort_values('Dead')
     print(death_df[['Dead', 'Name']])
+
+    print("\nWhat about exposures?")
+    exposed_df = mechanics_df.sort_values('Exposed')
+    print(exposed_df[['Exposed', 'Name']])
