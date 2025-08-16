@@ -15,11 +15,13 @@ def create_mechanics_df(d):
     mechanics = [m['name'] for m in d['mechanics']]
     
     df = pd.DataFrame(index=names, columns=mechanics)
-    for m in d['mechanics'][1:]:
+    for m in d['mechanics']:
         mechanic_actors = [d['actor'] for d in m['mechanicsData']]
         for n in names:
             if n in mechanic_actors:
-                df.loc[n][m['name']] = mechanic_actors.count(n)
+                df.loc[n, m['name']] = mechanic_actors.count(n)
+            if n == mechanic_actors[0]:
+                df.loc[n, m['name']+"_first"] = 1
     return df
 
 if __name__ == "__main__":
