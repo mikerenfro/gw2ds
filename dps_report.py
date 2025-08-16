@@ -32,11 +32,10 @@ def create_mechanics_df(d):
                 account = df.index[df['Name'] == md['actor']].tolist()[0]
             except IndexError:
                 # this is an NPC actor, make a row for them.
-                row = pd.Series(name=md['actor'],
-                                data={m['name']: md['time'],
+                row = pd.Series(data={m['name']: md['time'],
                                       'Name': md['actor']})
                 account = md['actor']
-                df.loc[md['actor']] = row
+                df.loc[account] = row
             if isinstance(df.at[account, m['name']], float) and \
                     math.isnan(df.at[account, m['name']]):
                 # If the cell is a NaN, overwrite it with a list containing
