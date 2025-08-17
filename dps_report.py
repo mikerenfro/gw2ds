@@ -13,18 +13,11 @@ def read_json_url(u):
 
 
 def create_mechanics_df(d):
-    # Make an initial dataframe indexed by account with columns of mechanics
+    # Make an initial dataframe indexed by position in df with columns for mechanic name, time, and actor
     df = pd.DataFrame(columns=['mechanic', 'time', 'actor'])
 
     # ensure we can store non-scalars in the mechanics columns
     for m in d['mechanics']:
-        m_name = m['name']
         for md in m['mechanicsData']:
-            time = md['time']
-            actor = md['actor']
-            # print(md)
-            df.loc[len(df)] = [m_name, time, actor]
-
-    # print(df)
-
+            df.loc[len(df)] = [m['name'], md['time'], md['actor']]
     return df
