@@ -13,11 +13,12 @@ def read_json_url(u):
     return data
 
 def get_players_df(d):
-    columns=["name", "profession"]
-    players_df = pd.DataFrame(columns=columns)
+    # instantiate df
+    df = pd.DataFrame(columns=["name", "profession"])
+    # add ea. player to df
     for p in d["players"]:
-        players_df.loc[p["account"]] = [p["name"], p["profession"]]
-    return players_df
+        df.loc[p["account"]] = [p["name"], p["profession"]]
+    return df
 
 def get_mechanics_df(d):
     # Make an initial dataframe indexed by position in df with columns for mechanic name, time, and actor
