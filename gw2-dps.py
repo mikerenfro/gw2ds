@@ -8,9 +8,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     data = dr.read_json_url(args.url)
-    mechanics_df = dr.create_mechanics_df(data)
-    print("Overall dataframe")
-    # print(mechanics_df['Exposed'])
+    mechanics_df = dr.get_mechanics_df(data)
+    players_df = dr.get_players_df(data)
 
     print("\nWho died when?")
     death_df = mechanics_df.loc[mechanics_df['mechanic'] == 'Dead'].sort_values('time')
